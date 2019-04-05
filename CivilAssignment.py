@@ -17,7 +17,7 @@ image = cv2.bitwise_not(image1) # Inverted image for thresholding and contouring
 height, width, channels =image1.shape # Returns the height, width and the number of channels in the shape
 
 imgray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) # Converts the given RGB image to grayscale
-ret,thresh = cv2.threshold(imgray,0,1,cv2.THRESH_BINARY) # Thresholds and converts all the colour values to binary only (i.e. Black or White)
+ret,thresh = cv2.threshold(imgray,0,255,cv2.THRESH_BINARY) # Thresholds and converts all the colour values to binary only (i.e. Black or White)
 image2,contours,hierarchy = cv2.findContours(thresh,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE) # Finds all the closed shapes (called contours) in the image
 
 cnt=contours[0] # Selects the first element of the contours found in the image
