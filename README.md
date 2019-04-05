@@ -1,4 +1,4 @@
-# civil-assignment
+# Centroid detection
 This project is a pretty simple project made in Python with the help of OpenCV.
 It is done to find the centroid of the surface given in any specific image. 
 
