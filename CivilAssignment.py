@@ -7,7 +7,6 @@ Year - 2019
 
 import cv2  # OpenCV2 library
 import numpy as np   #Numpy library for mathematical and array manipulations
-import imutils	
 
 imname = raw_input("Enter the image name with extension provided : ") # Takes name of image from user to find the centroid of
 
@@ -20,27 +19,27 @@ imgray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY) # Converts the given RGB image to 
 ret,thresh = cv2.threshold(imgray,0,255,cv2.THRESH_BINARY) # Thresholds and converts all the colour values to binary only (i.e. Black or White)
 image2,contours,hierarchy = cv2.findContours(thresh,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE) # Finds all the closed shapes (called contours) in the image
 
-cnt=contours[0] # Selects the first element of the contours found in the image
+for cnt in contours:
 
-M = cv2.moments(cnt) # Finding moments of the contour
-cx = int(M['m10']/M['m00']) # X-coordinate of centroid
-cy = int(M['m01']/M['m00']) # Y-coordinate of centroid
+	M = cv2.moments(cnt) # Finding moments of the contour
+	cx = int(M['m10']/M['m00']) # X-coordinate of centroid
+	cy = int(M['m01']/M['m00']) # Y-coordinate of centroid
 
-#Coordinates strings
-coordinates1 = 'The coordinates of centroid of '   
-coordinates2 = 'the surface is ('+str(cx)+','+str(cy)+')'	
+	# Coordinates strings	
+	coordinates1 = 'The coordinates of centroid of '   
+	coordinates2 = 'the surface is ('+str(cx)+','+str(cy)+')'	
 
-cv2.circle(image1,(cx,cy),1,(255,255,255),2) # Draws a circle with a small radius which appears as a dot
+	cv2.circle(image1,(cx,cy),1,(255,255,255),2) # Draws a circle with a small radius which appears as a dot
 
-#Height and Width strings
-heightstr = 'Height : '+str(height)
-widthstr = 'Width : '+str(width)
+	# Height and Width strings
+	heightstr = 'Height : '+str(height)
+	widthstr = 'Width : '+str(width)
 
-#Text insertion commands
-cv2.putText(image1,coordinates2,(cx-100,cy-20),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1)	
-cv2.putText(image1,coordinates1,(cx-120,cy-40),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,255,255),1)
-cv2.putText(image1,heightstr,(0,20),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,0),1)
-cv2.putText(image1,widthstr,(0,40),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,0),1)
+	# Text insertion commands
+	cv2.putText(image1,coordinates2,(cx-100,cy-20),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,0,255),1)	
+	cv2.putText(image1,coordinates1,(cx-120,cy-40),cv2.FONT_HERSHEY_SIMPLEX,0.5,(255,0,255),1)
+	cv2.putText(image1,heightstr,(0,20),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,0),1)
+	cv2.putText(image1,widthstr,(0,40),cv2.FONT_HERSHEY_SIMPLEX,0.5,(0,0,0),1)
 
 cv2.imshow(imname,image1) # Shows the final processed image containing required data 
 
